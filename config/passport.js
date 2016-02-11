@@ -12,12 +12,12 @@ _.merge(exports, {
 		    name: 'Google',
 		    protocol: 'oauth2',
 		    strategy: require('passport-google-oauth').OAuth2Strategy,
-		    options: {
-		      clientID: '735582085260-82qpbj88q7dc0tog2efhomrkj69k8ahk.apps.googleusercontent.com',
-		      clientSecret: 'Md_kylqc7NQYkuUsPlZxBoMl',
-		      scope: ['profile', 'email'],
-		      hd: 'murciaeduca.es'
-		    }
-	  }
+			options: {
+			  clientID: '1068516171501-ajjivruohla5hrq5q9ah73t1qveqcu5h.apps.googleusercontent.com',
+			  clientSecret: 'Fa6WYdwkly5K6uXyRxZSZpJS',
+			  scope: ['profile', 'email'],
+ 		      hd: 'murciaeduca.es'
+			}
+	  	}		
 	}
 });
