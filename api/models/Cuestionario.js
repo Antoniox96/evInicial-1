@@ -23,6 +23,13 @@ module.exports = {
     	via : 'cuestionarios'
     },
 
+    respuestas: {
+
+      collection: 'Respuesta',
+      via: 'cuestionario'
+
+    },
+
     duplicar: function (cb) {
 	    cuestionarioJSON = this.toJSON();
 	    delete cuestionarioJSON["id"];

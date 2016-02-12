@@ -9,21 +9,38 @@ module.exports = {
 
   attributes: {
 
-    pregunta : {
+    enunciado : {
     	type: 'string',
     	size: 255,
     	required: true
 	},
 
-    respuesta : { type: 'string',
-    	size: 255,
-    	required: true
+    respuestas : { 
+       collection: 'Respuesta',
+       via: 'pregunta'
+    },
+
+    tipo : { 
+        type: 'string',
+        enum: ['essay', 'matching', 'matching', 'numerical', 'shortanswer', 'truefalse']
+
+    },
+
+    opciones: {
+        collection: 'Opcion',
+        via: 'pregunta'
     },
 
     cuestionarios : {
         collection : 'cuestionario',
         via : 'preguntas'
+    },
+
+    Matching.toJSON: function(cb) {
+        
     }
+
   }
+
 };
 

@@ -1,163 +1,316 @@
 [
-  {
-    "model":"pregunta",
-    "items":[
-    {
-        "pregunta": "Capital de España",
-        "respuesta": "Madrid",
-        "id": 1
-    },
-    {
-        "pregunta": "Capital de Francia",
-        "respuesta": "Paris",
-        "id": 2
-    },
-    {
-        "pregunta": "Capital de Italia",
-        "respuesta": "Roma",
-        "id": 3
-    }
-]
-  },
-  {
-    "model":"cuestionario",
-    "items":[
-      {
-          "preguntas": [
-              {
-                  "pregunta": "Capital de Francia",
-                  "respuesta": "Paris",
-                  "id": 2
-              },
-              {
-                  "pregunta": "Capital de Italia",
-                  "respuesta": "Roma",
-                  "id": 3
-              }
-          ],
-          "alumnos": [],
-          "observaciones": "Evaluación Inicial",
-          "fechaFin": "2016-02-21T00:00:00.000Z",
-          "id": 1
-      },
-      {
-          "preguntas": [],
-          "alumnos": [],
-          "observaciones": "Evaluación final",
-          "fechaFin": "2016-06-20T00:00:00.000Z",
-          "id": 2
-      }
-    ]   
-  },
-  {
-    "model":"grupo",
-    "items":[
-      {
-          "alumnos": [],
-          "anyo": "2015/16",
-          "grupo": "2DAW",
-          "subgrupo": "2DAWO",
-          "ensenyanza": "Desarrollo de Aplicaciones Web",
-          "curso": "2",
-          "id": 1
-      },
-      {
-          "alumnos": [],
-          "anyo": "2015/16",
-          "grupo": "1DAW",
-          "subgrupo": "1DAWO",
-          "ensenyanza": "Desarrollo de Aplicaciones Web",
-          "curso": "1",
-          "id": 2
-      }
-    ]
-  },
-  {
-    "model":"alumno",
-    "items":[
-      {
-          "cuestionarios": [],
-          "grupo": {
-              "anyo": "2015/16",
-              "grupo": "2DAW",
-              "subgrupo": "2DAWO",
-              "ensenyanza": "Desarrollo de Aplicaciones Web",
-              "curso": "2",
-              "id": 1
-          },
-          "dni": "12345678A",
-          "apellido1": "alumno1ap1",
-          "apellido2": "alumno1ap2",
-          "nombre": "alumno1nombre",
-          "email": "email1@murciaeduca.es",
-          "fechaNac": "2000-01-01T00:00:00.000Z",
-          "id": 2
-      },
-      {
-          "cuestionarios": [],
-          "grupo": {
-              "anyo": "2015/16",
-              "grupo": "2DAW",
-              "subgrupo": "2DAWO",
-              "ensenyanza": "Desarrollo de Aplicaciones Web",
-              "curso": "2",
-              "id": 1
-          },
-          "dni": "12345678B",
-          "apellido1": "alumno2ap1",
-          "apellido2": "alumno2ap2",
-          "nombre": "alumno2nombre",
-          "email": "email2@murciaeduca.es",
-          "fechaNac": "2000-01-02T00:00:00.000Z",
-          "id": 3
-      },
-      {
-          "cuestionarios": [],
-          "grupo": {
-              "anyo": "2015/16",
-              "grupo": "2DAW",
-              "subgrupo": "2DAWO",
-              "ensenyanza": "Desarrollo de Aplicaciones Web",
-              "curso": "2",
-              "id": 1
-          },
-          "dni": "12345678C",
-          "apellido1": "alumno3ap1",
-          "apellido2": "alumno3ap2",
-          "nombre": "alumno3nombre",
-          "email": "email3@murciaeduca.es",
-          "fechaNac": "2000-01-03T00:00:00.000Z",
-          "id": 4
-      },
-      {
-          "cuestionarios": [],
-          "grupo": {
-              "anyo": "2015/16",
-              "grupo": "1DAW",
-              "subgrupo": "1DAWO",
-              "ensenyanza": "Desarrollo de Aplicaciones Web",
-              "curso": "1",
-              "id": 2
-          },
-          "dni": "12345678D",
-          "apellido1": "alumno4ap1",
-          "apellido2": "alumno4ap2",
-          "nombre": "alumno4nombre",
-          "email": "alumno@alu.murciaeduca.es",
-          "fechaNac": "2000-01-04T00:00:00.000Z",
-          "id": 5
-      }
-    ]
-  },
-    {
-    "model":"profesor",
-    "items":[
-      {
-          "apellidos": "Profesor Apellidos",
-          "nombre": "Profesor Nombre",
-          "email": "6347068@alu.murciaeduca.es",
-          "id": 1
-      }
-    ]
-  }
+   {
+      "model":"cuestionario",
+      "items":[
+         {
+            "preguntas":[
+
+            ],
+            "alumnos":[
+
+            ],
+            "respuestas":[
+
+            ],
+            "observaciones":"Evaluación Inicial",
+            "fechaFin":"2016-02-21T00:00:00.000Z",
+            "id":1
+         },
+         {
+            "preguntas":[
+
+            ],
+            "alumnos":[
+
+            ],
+            "observaciones":"Evaluación final",
+            "fechaFin":"2016-06-20T00:00:00.000Z",
+            "id":2
+         }
+      ]
+   },
+   {
+      "model":"grupo",
+      "items":[
+         {
+            "alumnos":[
+
+            ],
+            "anyo":"2015/16",
+            "grupo":"2DAW",
+            "subgrupo":"2DAWO",
+            "ensenyanza":"Desarrollo de Aplicaciones Web",
+            "curso":"2",
+            "id":1
+         },
+         {
+            "alumnos":[
+
+            ],
+            "anyo":"2015/16",
+            "grupo":"1DAW",
+            "subgrupo":"1DAWO",
+            "ensenyanza":"Desarrollo de Aplicaciones Web",
+            "curso":"1",
+            "id":2
+         }
+      ]
+   },
+   {
+      "model":"alumno",
+      "items":[
+         {
+            "cuestionarios":[
+
+            ],
+            "grupo":{
+               "anyo":"2015/16",
+               "grupo":"2DAW",
+               "subgrupo":"2DAWO",
+               "ensenyanza":"Desarrollo de Aplicaciones Web",
+               "curso":"2",
+               "id":1
+            },
+            "respuestas":[
+
+            ],
+            "dni":"12345678A",
+            "apellido1":"alumno1ap1",
+            "apellido2":"alumno1ap2",
+            "nombre":"alumno1nombre",
+            "email":"email1@murciaeduca.es",
+            "fechaNac":"2000-01-01T00:00:00.000Z",
+            "id":2
+         },
+         {
+            "cuestionarios":[
+
+            ],
+            "grupo":{
+               "anyo":"2015/16",
+               "grupo":"2DAW",
+               "subgrupo":"2DAWO",
+               "ensenyanza":"Desarrollo de Aplicaciones Web",
+               "curso":"2",
+               "id":1
+            },
+            "respuestas":[
+
+            ],
+            "dni":"12345678B",
+            "apellido1":"alumno2ap1",
+            "apellido2":"alumno2ap2",
+            "nombre":"alumno2nombre",
+            "email":"email2@murciaeduca.es",
+            "fechaNac":"2000-01-02T00:00:00.000Z",
+            "id":3
+         },
+         {
+            "cuestionarios":[
+
+            ],
+            "grupo":{
+               "anyo":"2015/16",
+               "grupo":"2DAW",
+               "subgrupo":"2DAWO",
+               "ensenyanza":"Desarrollo de Aplicaciones Web",
+               "curso":"2",
+               "id":1
+            },
+            "respuestas":[
+
+            ],
+            "dni":"12345678C",
+            "apellido1":"alumno3ap1",
+            "apellido2":"alumno3ap2",
+            "nombre":"alumno3nombre",
+            "email":"email3@murciaeduca.es",
+            "fechaNac":"2000-01-03T00:00:00.000Z",
+            "id":4
+         },
+         {
+            "cuestionarios":[
+
+            ],
+            "grupo":{
+               "anyo":"2015/16",
+               "grupo":"1DAW",
+               "subgrupo":"1DAWO",
+               "ensenyanza":"Desarrollo de Aplicaciones Web",
+               "curso":"1",
+               "id":2
+            },
+            "respuestas":[
+
+            ],
+            "dni":"12345678D",
+            "apellido1":"alumno4ap1",
+            "apellido2":"alumno4ap2",
+            "nombre":"alumno4nombre",
+            "email":"alumno@alu.murciaeduca.es",
+            "fechaNac":"2000-01-04T00:00:00.000Z",
+            "id":5
+         }
+      ]
+   },
+   {
+      "model":"profesor",
+      "items":[
+         {
+            "apellidos":"Profesor Apellidos",
+            "nombre":"Profesor Nombre",
+            "email":"6347068@alu.murciaeduca.es",
+            "id":1
+         }
+      ]
+   },
+   {
+      "model":"pregunta",
+      "items":[
+         {
+            "opciones":[
+               {
+                  "tipoOpcion":"shuffle",
+                  "id":1,
+                  "pregunta":1354739
+               },
+               {
+                  "tipoOpcion":"subquestion",
+                  "id":2,
+                  "pregunta":1354739
+               },
+               {
+                  "tipoOpcion":"subquestion",
+                  "id":3,
+                  "pregunta":1354739
+               }
+            ],
+            "enunciado":"Ensayo enunciado",
+            "tipo":"matching",
+            "id":1354739
+         }
+      ]
+   },
+   {
+      "model":"opcion",
+      "items":[
+         {
+            "subopciones":[
+               {
+                  "nombre":"shuffleanswers",
+                  "valor":"true",
+                  "id":1,
+                  "opcion":1
+               }
+            ],
+            "pregunta":1354739,
+            "tipoOpcion":"shuffle",
+            "id":1
+         },
+         {
+            "subopciones":[
+               {
+                  "nombre":"text",
+                  "valor":"Pregunta 1",
+                  "id":2,
+                  "opcion":2
+               },
+               {
+                  "nombre":"answer",
+                  "valor":"Respuesta 1",
+                  "id":3,
+                  "opcion":2
+               }
+            ],
+            "tipoOpcion":"subquestion",
+            "id":2,
+            "pregunta":1354739
+         },
+         {
+            "subopciones":[
+               {
+                  "nombre":"text",
+                  "valor":"Pregunta 2",
+                  "id":4,
+                  "opcion":3
+               },
+               {
+                  "nombre":"answer",
+                  "valor":"Respuesta 2",
+                  "id":5,
+                  "opcion":3
+               }
+            ],
+            "tipoOpcion":"subquestion",
+            "id":3,
+            "pregunta":1354739
+         },
+         {
+            "subopciones":[
+               {
+                  "nombre":"text",
+                  "valor":"Pregunta 1",
+                  "id":6,
+                  "opcion":4
+               },
+               {
+                  "nombre":"answer",
+                  "valor":"Respuesta 1",
+                  "id":7,
+                  "opcion":4
+               }
+            ],
+            "tipoOpcion":"subquestion",
+            "id":4,
+            "pregunta":1354739
+         }
+      ]
+   },
+   {
+      "model":"subopcion",
+      "items":[
+         {
+            "nombre":"shuffleanswers",
+            "valor":"true",
+            "id":1,
+            "opcion":1
+         },
+         {
+            "nombre":"text",
+            "valor":"Pregunta 1",
+            "id":2,
+            "opcion":2
+         },
+         {
+            "nombre":"answer",
+            "valor":"Respuesta 1",
+            "id":3,
+            "opcion":2
+         },
+         {
+            "nombre":"text",
+            "valor":"Pregunta 2",
+            "id":4,
+            "opcion":3
+         },
+         {
+            "nombre":"answer",
+            "valor":"Respuesta 2",
+            "id":5,
+            "opcion":3
+         },
+         {
+            "nombre":"text",
+            "valor":"Pregunta 3",
+            "id":6,
+            "opcion":4
+         },
+         {
+            "nombre":"answer",
+            "valor":"Respuesta 3",
+            "id":7,
+            "opcion":4
+         }
+      ]
+   }
 ]
