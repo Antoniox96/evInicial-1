@@ -61,4 +61,9 @@ module.exports.routes = {
     'CuestionarioController.asociarGrupo'
   ],
 
+    'GET r|^/pregunta/(\\d+)$|preguntaId' : [
+    'PreguntaController.load',
+    'PreguntaController.matchingToJSON'
+  ],
+
 };

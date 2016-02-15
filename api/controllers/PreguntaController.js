@@ -25,6 +25,11 @@ module.exports = {
 			resultado = 'Correcto';
 		}
 		res.json(resultado);
-	} 
-};
+	},
 
+	matchingToJSON: function(req, res) {
+		req.pregunta.matchingToJSON(function(PreguntaJSON){
+			res.json(PreguntaJSON);
+		});
+	}
+};

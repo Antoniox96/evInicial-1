@@ -36,11 +36,14 @@ module.exports = {
         via : 'preguntas'
     },
 
-    Matching.toJSON: function(cb) {
-        
+    matchingToJSON: function(cb) {
+        var PreguntaJSON = this.toJSON();
+        Opcion.find().where({ pregunta: this.id }).populate('subopciones').then(function(opciones){
+            PreguntaJSON['opciones'] = opciones; 
+            cb(PreguntaJSON);
+        }).catch(function(error){});
     }
 
   }
 
 };
-
