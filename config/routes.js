@@ -66,4 +66,10 @@ module.exports.routes = {
     'PreguntaController.matchingToJSON'
   ],
 
+  'POST r|^/cuestionario/(\\d+)/pregunta/(\\d+)/respuesta$|cuestionarioId,preguntaId' : [
+    'CuestionarioController.load',
+    'PreguntaController.load',
+    'RespuestaController.asignarPuntuacion'
+  ]
+
 };
