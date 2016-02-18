@@ -62,6 +62,17 @@ module.exports.policies = {
 
   AuthController: {
     '*': ['passport']
-  }
+  },
 
+  CuestionarioController: {
+    'load' : ['isAlumno']
+  },
+
+  PreguntaController: {
+    'load' : ['isAlumno']
+  },
+
+  RespuestaController: {
+    'asignarPuntuacion' : ['isAlumno']
+  },
 };

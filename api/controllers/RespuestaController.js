@@ -18,46 +18,49 @@ module.exports = {
 	},
 
 	asignarPuntuacion: function(req, res) {
-		Respuesta = req.body.answered.split("$$");
+		Answered = req.body.answered.split("$$");
 		Incremento = 0;
 	    Puntos = 0;
 
-		console.log(Respuesta);
-		
-		/*Opcion.find().where({ pregunta: req.pregunta.id, tipoOpcion: 'subquestion' }).populate('subopciones')
+
+		// Cliente envia ID de la 'subquestion' y el ID de la subopcion 'answer'.
+
+		Opcion.find().where({ pregunta: req.pregunta.id, tipoOpcion: 'subquestion' }).populate('subopciones')
 	        .then(function(opciones){
+	        	
+	        	Puntos = 0;
+				Incremento = Math.floor(100 / opciones.length);
 
-	        	Incremento = Math.floor(100 / opciones.length);
-
-	        })
-	        .catch(function(error){});*/
-
-			Opcion.find().where({ pregunta: req.pregunta.id, tipoOpcion: 'subquestion' }).populate('subopciones')
-		        .then(function(opciones){
-		        	Puntos = 0;
-					Incremento = Math.floor(100 / opciones.length);
-
-					for ( i = 0 ; i < Respuesta.length-1 ; i += 2 ) {
-						for ( n = 0 ; n < opciones.length ; n++ ) {
-							if ( parseInt(Respuesta[i]) == opciones[n].id ) {
-								if ( Respuesta[i+1] == opciones[n].subopciones[1].valor ) {
-									Puntos += Incremento;
-									res.json(Puntos)
-								}
+				for ( i = 0 ; i < Answered.length ; i += 2 ) {
+					for ( n = 0 ; n < opciones.length ; n++ ) {
+						if ( parseInt(Answered[i]) == opciones[n].id ) {
+							if ( Answered[i+1] == opciones[n].subopciones[1].id ) {
+								Puntos += Incremento;
+								console.log(Puntos);
 							}
 						}
 					}
+				}
 
+				Alumno.findOne({ user: req.session.passport.user })
+					.then(function(alumno) {
 
+						Respuesta.create({ alumno: alumno, cuestionario: req.cuestionario, pregunta: req.pregunta, 
+										   valor: Answered, puntuacion: Puntos })
+						 .exec(function createCB(err, created){
+					   		console.log(created);
+						});
+							
+						console.log(alumno);
+					})
+					.catch(function(error){
+	        			console.log(error);
+        			});
 
-		        })
-		        .catch(function(error){});
-
-		/*Respuesta.asignarPuntuacion(function(RespuestaJSON){*/
-			console.log(Puntos);
-
-		/*});
-	*/
+	        })
+	        .catch(function(error){
+	        	console.log(error);
+	        });
 
 	}
 };

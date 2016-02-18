@@ -147,7 +147,7 @@
             "apellido1":"alumno4ap1",
             "apellido2":"alumno4ap2",
             "nombre":"alumno4nombre",
-            "email":"alumno@alu.murciaeduca.es",
+            "email":"6347068@alu.murciaeduca.es",
             "fechaNac":"2000-01-04T00:00:00.000Z",
             "id":5
          }
@@ -159,7 +159,7 @@
          {
             "apellidos":"Profesor Apellidos",
             "nombre":"Profesor Nombre",
-            "email":"6347068@alu.murciaeduca.es",
+            "email":"profesor@amurciaeduca.es",
             "id":1
          }
       ]
