@@ -37,6 +37,12 @@ module.exports = {
 		console.log(req.cuestionario.id + ' - ' + req.cuestionario.alumnos)
 		req.cuestionario.asociarGrupo(req.grupo);
 		res.json(req.cuestionario);
+	},
+
+	getPreguntas: function(req, res, next) {
+		req.cuestionario.getPreguntas(function(Preguntas) {
+			res.json(Preguntas);
+		});
 	}
 
 };

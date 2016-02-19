@@ -63,7 +63,7 @@ module.exports.routes = {
 
     'GET r|^/pregunta/(\\d+)$|preguntaId' : [
     'PreguntaController.load',
-    'PreguntaController.matchingToJSON'
+    'PreguntaController.toJSON'
   ],
 
   'POST r|^/cuestionario/(\\d+)/pregunta/(\\d+)/respuesta$|cuestionarioId,preguntaId' : [

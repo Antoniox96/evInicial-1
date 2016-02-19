@@ -27,8 +27,8 @@ module.exports = {
 		res.json(resultado);
 	},
 
-	matchingToJSON: function(req, res) {
-		req.pregunta.matchingToJSON(function(PreguntaJSON){
+	toJSON: function(req, res) {
+		req.pregunta.aJSON(function(PreguntaJSON){
 			res.json(PreguntaJSON);
 		});
 	}

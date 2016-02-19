@@ -45,14 +45,19 @@ module.exports = {
 	    })
     },
 
-  asociarGrupo: function (grupo, cb) {
+    asociarGrupo: function (grupo, cb) {
 
 	    while (grupo.alumnos.length){
 	    	var alumno = grupo.alumnos.pop();
 		    this.alumnos.add(alumno.id);
 		    this.save(console.log);
 	    }
+    },
+
+    getPreguntas: function(cb) {
+      
     }
+
   },
 
   duplicar: function (cuestionario, cb) {

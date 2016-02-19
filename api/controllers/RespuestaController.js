@@ -33,10 +33,10 @@ module.exports = {
 
 				for ( i = 0 ; i < Answered.length ; i += 2 ) {
 					for ( n = 0 ; n < opciones.length ; n++ ) {
-						if ( parseInt(Answered[i]) == opciones[n].id ) {
-							if ( Answered[i+1] == opciones[n].subopciones[1].id ) {
-								Puntos += Incremento;
-							}
+						if ( Answered[i] == opciones[n].subopciones[0].valor && 
+							 Answered[i+1] == opciones[n].subopciones[1].valor ) {
+							
+							Puntos += Incremento;
 						}
 					}
 				}
