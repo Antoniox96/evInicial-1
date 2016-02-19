@@ -17,20 +17,7 @@ module.exports = {
 
   	valor: { type: 'string', size: 255, required: true },
 
-  	puntuacion: { type: 'integer' },
-
-  	asignarPuntuacion: function(cb) { 			
-        
-	    var newValor;
-	    var newPuntuacion;   
-
-        Respuesta.create({ alumno: req.alumno.id, cuestionario: req.cuestionario.id, pregunta: req.pregunta.id,
-        				   valor: newValor, puntuacion: newPuntuacion })
-	        .exec(function create(err, created){
-		      	if (err) return cb(err);
-				cb(null, created);
-		    })
-    }
+  	puntuacion: { type: 'integer' }
 
   }
 
