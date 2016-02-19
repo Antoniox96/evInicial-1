@@ -36,7 +36,6 @@ module.exports = {
 						if ( parseInt(Answered[i]) == opciones[n].id ) {
 							if ( Answered[i+1] == opciones[n].subopciones[1].id ) {
 								Puntos += Incremento;
-								console.log(Puntos);
 							}
 						}
 					}
@@ -48,10 +47,9 @@ module.exports = {
 						Respuesta.create({ alumno: alumno, cuestionario: req.cuestionario, pregunta: req.pregunta, 
 										   valor: Answered, puntuacion: Puntos })
 						 .exec(function createCB(err, created){
-					   		console.log(created);
+					   		res.json(Puntos);
 						});
-							
-						console.log(alumno);
+
 					})
 					.catch(function(error){
 	        			console.log(error);
