@@ -45,11 +45,7 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  'GET r|^/pregunta/(\\d+)/corregir$|preguntaId' : [
-    'PreguntaController.load',
-    'PreguntaController.corregirRespuesta'
-  ],
-
+  
     'POST r|^/cuestionario/(\\d+)/duplicar$|cuestionarioId' : [
     'CuestionarioController.load',
     'CuestionarioController.duplicar'
@@ -63,13 +59,18 @@ module.exports.routes = {
 
     'GET r|^/pregunta/(\\d+)$|preguntaId' : [
     'PreguntaController.load',
-    'PreguntaController.toJSON'
+    'PreguntaController.PreguntaToJSON'
   ],
 
   'POST r|^/cuestionario/(\\d+)/pregunta/(\\d+)/respuesta$|cuestionarioId,preguntaId' : [
     'CuestionarioController.load',
     'PreguntaController.load',
     'RespuestaController.asignarPuntuacion'
+  ],
+
+  'GET r|^/cuestionario/(\\d+)/preguntas$|cuestionarioId' : [
+    'CuestionarioController.load',
+    'CuestionarioController.preguntasToJSON',
   ]
 
 };

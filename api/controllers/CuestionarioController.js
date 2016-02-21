@@ -19,14 +19,14 @@ module.exports = {
 	},
 
 	duplicar: function(req, res, next) {
-/* Con metodo de clase 
+	/* Con metodo de clase 
 		Cuestionario.duplicar
 			(req.cuestionario,	function (err, cuestionarioDuplicado)
 				{ res.json(cuestionarioDuplicado)}
 			);
-*/
-/* Con metodo de instancia */
+	*/
 
+	/* Con metodo de instancia */
 		req.cuestionario.duplicar
 			(function (err, cuestionarioDuplicado)
 				{ res.json(cuestionarioDuplicado)}
@@ -39,8 +39,8 @@ module.exports = {
 		res.json(req.cuestionario);
 	},
 
-	getPreguntas: function(req, res, next) {
-		req.cuestionario.getPreguntas(function(Preguntas) {
+	preguntasToJSON: function(req, res, next) {
+		req.cuestionario.preguntasToJSON(function(Preguntas) {
 			res.json(Preguntas);
 		});
 	}

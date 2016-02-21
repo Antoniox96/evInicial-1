@@ -54,8 +54,19 @@ module.exports = {
 	    }
     },
 
-    getPreguntas: function(cb) {
-      
+    preguntasToJSON: function(cb) {
+
+      PreguntasJSON = [];
+
+      this.preguntas.forEach(function(Pregunta){
+
+        Pregunta.aJSON(function(PreguntaJSON){ PreguntasJSON.push(PreguntaJSON); });
+        
+        console.log(PreguntasJSON.length);
+      })
+
+      cb(PreguntasJSON);
+
     }
 
   },

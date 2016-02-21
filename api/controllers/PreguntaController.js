@@ -18,16 +18,7 @@ module.exports = {
 		}).catch(function(error){next(error);});
 	},
 
-	corregirRespuesta: function(req, res) {
-		var respuestaVal = (req.query.respuesta) ? req.query.respuesta : undefined,
-			resultado = 'Incorrecto';
-		if(req.pregunta.respuesta == respuestaVal) {
-			resultado = 'Correcto';
-		}
-		res.json(resultado);
-	},
-
-	toJSON: function(req, res) {
+	PreguntaToJSON: function(req, res) {
 		req.pregunta.aJSON(function(PreguntaJSON){
 			res.json(PreguntaJSON);
 		});
