@@ -197,6 +197,37 @@
             "enunciado":"Ensayo enunciado",
             "tipo":"matching",
             "id":1354739
+         },
+         {
+            "opciones":[
+               {
+                  "tipoOpcion":"shuffle",
+                  "id":1,
+                  "pregunta":2
+               },
+               {
+                  "tipoOpcion":"subquestion",
+                  "id":2,
+                  "pregunta":2
+               },
+               {
+                  "tipoOpcion":"subquestion",
+                  "id":3,
+                  "pregunta":2
+               }
+            ],
+            "cuestionarios":[
+               {
+                 "observaciones": "Evaluación Inicial",
+                 "fechaFin": "2016-02-21T00:00:00.000Z",
+                 "id": 1,
+                 "createdAt": "2016-02-15T02:02:25.662Z",
+                 "updatedAt": "2016-02-15T02:02:25.682Z"
+               }
+            ],
+            "enunciado":"Ensayo enunciado",
+            "tipo":"matching",
+            "id":2
          }
       ]
    },

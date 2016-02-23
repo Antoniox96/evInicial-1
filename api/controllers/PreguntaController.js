@@ -18,9 +18,10 @@ module.exports = {
 		}).catch(function(error){next(error);});
 	},
 
-	PreguntaToJSON: function(req, res) {
-		req.pregunta.aJSON(function(PreguntaJSON){
-			res.json(PreguntaJSON);
-		});
+	corregir: function(req, res, next) {
+		req.pregunta.corregir(req, function(preguntaCorregida) {
+				res.json(preguntaCorregida);
+			});
 	}
+
 };

@@ -39,9 +39,11 @@ module.exports = {
 		res.json(req.cuestionario);
 	},
 
-	preguntasToJSON: function(req, res, next) {
-		req.cuestionario.preguntasToJSON(function(Preguntas) {
-			res.json(Preguntas);
+	findOne: function(req, res, next) {
+		Cuestionario.findOne(req.params.id).populate('preguntas').then(function(cuestionario){
+			cuestionario.aJSON(function(cuestionarioJSON){
+				res.json(cuestionarioJSON);
+			}); 
 		});
 	}
 

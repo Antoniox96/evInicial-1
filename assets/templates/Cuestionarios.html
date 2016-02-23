@@ -1,15 +1,6 @@
-﻿<!doctype html>
-<html ng-app="sandbox-app">
-<head>
-	<script src="Angular Minified 1.5.js"></script>
-	<script src="Controlador.js"></script>
-</head>
-<body>
-<h2>Todo</h2>
-<div ng-controller="CuestionarioController">
-    <ol>
-		{{Cuestionarios}}
-    </ol>
-</div>
-</body>
-</html>
+﻿<h4 ng-show="Loading">Cargando...</h4>
+<ul ng-hide="cuestionarios.length < 0">
+	<li ng-repeat="cuestionario in cuestionarios">
+		<h2>{{ cuestionario.id + " - " + cuestionario.observaciones + " - " + cuestionario.fechaFin }}</h2>
+	</li>
+</ul>

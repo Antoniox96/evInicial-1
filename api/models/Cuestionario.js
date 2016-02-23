@@ -54,13 +54,17 @@ module.exports = {
 	    }
     },
 
-    preguntasToJSON: function(cb) {
+/*    preguntasToJSON: function(cb) {
 
       PreguntasJSON = [];
-
+      //this.preguntas[0].aJSON(function(PreguntaJSON){ PreguntasJSON.push(PreguntaJSON); });
+      
       this.preguntas.forEach(function(Pregunta){
 
-        Pregunta.aJSON(function(PreguntaJSON){ PreguntasJSON.push(PreguntaJSON); });
+        console.log(Pregunta);
+        Pregunta.aJSON(function(PreguntaJSON){
+           PreguntasJSON.push(PreguntaJSON); console.log(PreguntasJSON.length);
+        });
         
         console.log(PreguntasJSON.length);
       })
@@ -69,7 +73,28 @@ module.exports = {
 
     }
 
-  },
+  },*/
+
+  aJSON: function(cb) {
+
+      var preguntasJSON = [];
+      var cuestionarioJSON = this.toJSON();
+
+      this.preguntas.forEach(function(pregunta) {
+          preguntasJSON.push(pregunta.aJSON());
+      });
+
+      Promise.all(preguntasJSON).then(function(opciones) {
+        
+        preguntasJSON.forEach(function(preguntaJSON, index) {
+          cuestionarioJSON.preguntas[index].opciones = opciones;
+        });
+
+        cb(cuestionarioJSON);
+
+      });
+  }
+},
 
   duplicar: function (cuestionario, cb) {
 

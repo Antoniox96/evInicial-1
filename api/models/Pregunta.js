@@ -7,87 +7,133 @@
 
 module.exports = {
 
-  attributes: {
+	attributes: {
 
-    enunciado : {
-    	type: 'string',
-    	size: 255,
-    	required: true
+		enunciado : {
+			type: 'string',
+			size: 255,
+			required: true
 	},
 
-    respuestas : { 
-       collection: 'Respuesta',
-       via: 'pregunta'
-    },
+		respuestas : { 
+			 collection: 'Respuesta',
+			 via: 'pregunta'
+		},
 
-    tipo : { 
-        type: 'string',
-        enum: ['essay', 'matching', 'multichoice', 'numerical', 'shortanswer', 'truefalse']
+		tipo : { 
+				type: 'string',
+				enum: ['essay', 'matching', 'multichoice', 'numerical', 'shortanswer', 'truefalse']
 
-    },
+		},
 
-    opciones: {
-        collection: 'Opcion',
-        via: 'pregunta'
-    },
+		opciones: {
+				collection: 'Opcion',
+				via: 'pregunta'
+		},
 
-    cuestionarios : {
-        collection : 'cuestionario',
-        via : 'preguntas'
-    },
+		cuestionarios : {
+				collection : 'cuestionario',
+				via : 'preguntas'
+		},
 
-    aJSON: function(cb) {
-        switch(this.tipo) {
+		corregir: function(req, cb) {
+				switch(this.tipo) {
           case 'essay':
-              this.essayToJSON(function(PreguntaJSON){cb(PreguntaJSON)});
+              cb(this.guardarRespuesta(req, this.corregirEssay(req)));
               break;
           case 'matching':
-              this.matchingToJSON(function(PreguntaJSON){cb(PreguntaJSON)});
+              cb(this.guardarRespuesta(req, this.corregirMatching(req)));
+              sails.log.verbose(this.corregirMatching(req));
               break;
           case 'multichoice':
-              this.multichoiceToJSON(function(PreguntaJSON){cb(PreguntaJSON)});
+              cb(this.guardarRespuesta(req, this.corregirMultichoice(req)));
               break;
           case 'numerical':
-              this.numericalToJSON(function(PreguntaJSON){cb(PreguntaJSON)});
+              cb(this.guardarRespuesta(req, this.corregirNumerical(req)));
               break;
           case 'shortanswer':
-              this.shortanswerToJSON(function(PreguntaJSON){cb(PreguntaJSON)});
+              cb(this.guardarRespuesta(req, this.corregirShortanswer(req)));
               break;
           case 'truefalse':
-              this.truefalseToJSON(function(PreguntaJSON){cb(PreguntaJSON)});
+              cb(this.guardarRespuesta(req, this.corregirTruefalse(req)));
               break;
           default:
               break;
-        }      
-    },
+         }
+		},
 
-    essayToJSON: function(cb) {
+		corregirEssay: function() {
 
-    },
+		},
 
-    matchingToJSON: function(cb) {
-        var PreguntaJSON = this.toJSON();
-        Opcion.find().where({ pregunta: this.id }).populate('subopciones').then(function(opciones){
-            PreguntaJSON['opciones'] = opciones; 
-            cb(PreguntaJSON);
-        }).catch(function(error){});
-    },
+		corregirMatching: function(req) {
+				Answered = req.body.answered.split("$$");
+				Incremento = 0;
+				Puntos = 0;
 
-    multichoiceToJSON: function(cb) {
+				// Cliente envia ID de la 'subquestion' y el ID de la subopcion 'answer'.
 
-    },
+				Opcion.find().where({ pregunta: this.id, tipoOpcion: 'subquestion' }).populate('subopciones')
+						.then(function(opciones){
+								
+								Puntos = 0;
+								Incremento = Math.floor(100 / opciones.length);
 
-    numericalToJSON: function(cb) {
+								for ( i = 0 ; i < Answered.length ; i += 2 ) {
+										for ( n = 0 ; n < opciones.length ; n++ ) {
+												if ( Answered[i] == opciones[n].subopciones[0].valor && 
+														 Answered[i+1] == opciones[n].subopciones[1].valor ) {
 
-    },
+														Puntos += Incremento;
+												}
+										}
+								}
 
-    shortanswerToJSON: function(cb) {
+								return Puntos;
+								
+						})
+						.catch(function(error){
+								console.log(error);
+						});
+				
+		},
 
-    },
+		corregirMultichoice: function() {
 
-    truefalseToJSON: function(cb) {
+		},
 
-    }
-  }
+		corregirNumerical: function() {
+
+		},
+
+		corregirShortanswer: function() {
+
+		},
+
+		corregirTruefalse: function() {
+
+		},		
+
+		guardarRespuesta: function(req, Puntos) {
+			Alumno.findOne({ user: req.session.passport.user })
+				.then(function(alumno) {
+
+					Respuesta.create({ alumno: alumno, cuestionario: req.cuestionario, pregunta: req.pregunta, 
+														 valor: req.body.answered, puntuacion: Puntos })
+					 .exec(function createCB(err, created){
+							return Puntos;
+					});
+
+				})
+				.catch(function(error){
+						console.log(error);
+				});
+		},
+
+		aJSON: function() {
+				return Opcion.find().where({ pregunta: this.id }).populate('subopciones');
+		}
+
+	},
 
 };

@@ -69,10 +69,8 @@ module.exports.policies = {
   },
 
   PreguntaController: {
-    'load' : ['sessionAuth', 'isAlumno']
-  },
-
-  RespuestaController: {
-    'asignarPuntuacion' : ['sessionAuth', 'isAlumno']
+    'load' : ['sessionAuth', 'isAlumno'],
+    
+    'corregir' : ['sessionAuth', 'isAlumno']
   },
 };
