@@ -16,123 +16,139 @@ module.exports = {
 	},
 
 		respuestas : { 
-			 collection: 'Respuesta',
-			 via: 'pregunta'
+			collection: 'Respuesta',
+			via: 'pregunta'
 		},
 
 		tipo : { 
-				type: 'string',
-				enum: ['essay', 'matching', 'multichoice', 'numerical', 'shortanswer', 'truefalse']
+			type: 'string',
+			enum: ['essay', 'matching', 'multichoice', 'numerical', 'truefalse']
 
 		},
 
 		opciones: {
-				collection: 'Opcion',
-				via: 'pregunta'
+			collection: 'Opcion',
+			via: 'pregunta'
 		},
 
 		cuestionarios : {
-				collection : 'cuestionario',
-				via : 'preguntas'
+			collection : 'cuestionario',
+			via : 'preguntas'
 		},
 
-		corregir: function(req, cb) {
-				switch(this.tipo) {
-          case 'essay':
-              cb(this.guardarRespuesta(req, this.corregirEssay(req)));
-              break;
-          case 'matching':
-              cb(this.guardarRespuesta(req, this.corregirMatching(req)));
-              sails.log.verbose(this.corregirMatching(req));
-              break;
-          case 'multichoice':
-              cb(this.guardarRespuesta(req, this.corregirMultichoice(req)));
-              break;
-          case 'numerical':
-              cb(this.guardarRespuesta(req, this.corregirNumerical(req)));
-              break;
-          case 'shortanswer':
-              cb(this.guardarRespuesta(req, this.corregirShortanswer(req)));
-              break;
-          case 'truefalse':
-              cb(this.guardarRespuesta(req, this.corregirTruefalse(req)));
-              break;
-          default:
-              break;
-         }
+		corregir: function(respuestaCompleta, cb) {
+			var This = this;
+			switch(This.tipo) {
+				case 'essay':
+					This.guardarRespuesta(respuestaCompleta, null, function(Puntos) { cb(Puntos); });
+					break;
+				case 'matching':
+					This.corregirMatching(respuestaCompleta, function(respuestaCompleta, Puntos){ This.guardarRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+					break;
+				case 'multichoice':
+					This.corregirMultichoice(respuestaCompleta, function(respuestaCompleta, Puntos){ This.guardarRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+					break;
+				case 'numerical':
+					This.corregirNumerical(respuestaCompleta, function(respuestaCompleta, Puntos){ This.guardarRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+					break;
+				case 'truefalse':
+					This.corregirTruefalse(respuestaCompleta, function(respuestaCompleta, Puntos){ This.guardarRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+					break;
+				default:
+					break;
+			 }
 		},
 
-		corregirEssay: function() {
+		corregirMatching: function(respuestaCompleta, cb) {
+			Answered = respuestaCompleta.answered.split("$$");
+			Incremento = 0;
+			Puntos = 0;
 
-		},
+			// Cliente envia ID de la 'subquestion' y el ID de la subopcion 'answer'.
 
-		corregirMatching: function(req) {
-				Answered = req.body.answered.split("$$");
-				Incremento = 0;
-				Puntos = 0;
+			Opcion.find().where({ pregunta: this.id, tipoOpcion: 'subquestion' }).populate('subopciones')
+				.then(function(opciones){
+						
+					Puntos = 0;
+					Incremento = Math.floor(100 / opciones.length);
 
-				// Cliente envia ID de la 'subquestion' y el ID de la subopcion 'answer'.
+					for ( i = 0 ; i < Answered.length ; i += 2 ) {
+						for ( n = 0 ; n < opciones.length ; n++ ) {
+							if ( Answered[i] == opciones[n].subopciones[0].valor && 
+								Answered[i+1] == opciones[n].subopciones[1].valor ) {
 
-				Opcion.find().where({ pregunta: this.id, tipoOpcion: 'subquestion' }).populate('subopciones')
-						.then(function(opciones){
-								
-								Puntos = 0;
-								Incremento = Math.floor(100 / opciones.length);
+								Puntos += Incremento;
+							}
+						}
+					}
 
-								for ( i = 0 ; i < Answered.length ; i += 2 ) {
-										for ( n = 0 ; n < opciones.length ; n++ ) {
-												if ( Answered[i] == opciones[n].subopciones[0].valor && 
-														 Answered[i+1] == opciones[n].subopciones[1].valor ) {
-
-														Puntos += Incremento;
-												}
-										}
-								}
-
-								return Puntos;
-								
-						})
-						.catch(function(error){
-								console.log(error);
-						});
-				
-		},
-
-		corregirMultichoice: function() {
-
-		},
-
-		corregirNumerical: function() {
-
-		},
-
-		corregirShortanswer: function() {
-
-		},
-
-		corregirTruefalse: function() {
-
-		},		
-
-		guardarRespuesta: function(req, Puntos) {
-			Alumno.findOne({ user: req.session.passport.user })
-				.then(function(alumno) {
-
-					Respuesta.create({ alumno: alumno, cuestionario: req.cuestionario, pregunta: req.pregunta, 
-														 valor: req.body.answered, puntuacion: Puntos })
-					 .exec(function createCB(err, created){
-							return Puntos;
-					});
-
+					cb(respuestaCompleta, Puntos);
+						
 				})
 				.catch(function(error){
 						console.log(error);
 				});
 		},
 
+		corregirMultichoice: function(respuestaCompleta, cb) {
+			Answered = respuestaCompleta.answered;
+
+			Subopcion.findOne({
+                where: {opcion: Number(Answered), nombre: "fraccion"}
+            }).then(function(subopcion){
+                var Puntos = subopcion.valor;
+                Subopcion.findOne({
+                    where: {opcion: Number(Answered), nombre: "text"}
+                }).then(function(subopcion){
+                    respuestaCompleta.answered = subopcion.valor;
+					cb(respuestaCompleta, Puntos);
+                })  
+            })
+		},
+
+		corregirNumerical: function(respuestaCompleta, cb) { 
+	 		Answered = respuestaCompleta.answered;
+	            
+	        Opcion.findOne({
+	            where: { id: Number(Answered) }
+	        }).populate('subopciones').then(function(opcion){
+	            opcion.subopciones.forEach(function(subopcion){
+	                if(subopcion.nombre == 'fraction'){
+                		var Puntos = subopcion.valor;
+	                }
+	                if(subopcion.nombre == 'text'){
+	                    respuestaCompleta.answered = subopcion.valor;
+	                }
+	            });
+				cb(respuestaCompleta, Puntos);
+	        })
+		},
+
+		corregirTruefalse: function(respuestaCompleta, cb) { 
+
+		},		
+
 		aJSON: function() {
 				return Opcion.find().where({ pregunta: this.id }).populate('subopciones');
+		},
+
+		guardarRespuesta: function(respuestaCompleta, Puntos, cb) {
+			Alumno.findOne({ user: respuestaCompleta.usuario })
+				.then(function(alumno) {
+
+					Respuesta.create({ alumno: alumno, cuestionario: respuestaCompleta.cuestionario, 
+									   pregunta: respuestaCompleta.pregunta, valor: respuestaCompleta.answered, 
+									   puntuacion: Puntos })
+					 .exec(function createCB(err, created){
+							cb(Puntos);
+					});
+
+				})
+				.catch(function(error){
+						console.log(error);
+				});
 		}
+
 
 	},
 

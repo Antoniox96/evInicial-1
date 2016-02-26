@@ -19,7 +19,14 @@ module.exports = {
 	},
 
 	corregir: function(req, res, next) {
-		req.pregunta.corregir(req, function(preguntaCorregida) {
+		var respuestaCompleta = {
+									answered: req.body.answered, 
+									cuestionario: req.cuestionario, 
+									pregunta: req.pregunta,
+									usuario: req.session.passport.user
+								}
+
+		req.pregunta.corregir(respuestaCompleta, function(preguntaCorregida) {
 				res.json(preguntaCorregida);
 			});
 	}
