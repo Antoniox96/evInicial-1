@@ -77,17 +77,17 @@ module.exports = {
 
   aJSON: function(cb) {
 
-      var preguntasJSON = [];
+      var opciones = [];
       var cuestionarioJSON = this.toJSON();
 
       this.preguntas.forEach(function(pregunta) {
-          preguntasJSON.push(pregunta.aJSON());
+          opciones.push(pregunta.aJSON());
       });
 
-      Promise.all(preguntasJSON).then(function(opciones) {
+      Promise.all(opciones).then(function(opcionesPromise) {
         
-        preguntasJSON.forEach(function(preguntaJSON, index) {
-          cuestionarioJSON.preguntas[index].opciones = opciones;
+        opcionesPromise.forEach(function(opcionPromise, index) {
+          cuestionarioJSON.preguntas[index].opciones = opcionPromise;
         });
 
         cb(cuestionarioJSON);

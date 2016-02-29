@@ -277,6 +277,30 @@
             "pregunta":1354741
           }
         ]
+      },
+      {
+        "enunciado":"Ensayo enunciado",
+        "tipo":"truefalse",
+        "id":1354744,
+        "opciones":[
+          {
+            "tipo":"truefalse",
+            "id":12,
+            "pregunta":1354744
+          },
+          {
+            "tipo":"truefalse",
+            "id":13,
+            "pregunta":1354744
+          }
+        ],
+        "cuestionarios":[
+          {
+            "observaciones":"Evaluación Inicial",
+            "fechaFin":"2016-02-21T00:00:00.000Z",
+            "id":1
+          }
+        ]
       }
     ]
   },
@@ -382,7 +406,7 @@
       {
         "subopciones":[
           {
-            "nombre":"fraccion",
+            "nombre":"fraction",
             "valor":"100",
             "id":10,
             "opcion":7
@@ -401,7 +425,7 @@
       {
         "subopciones":[
           {
-            "nombre":"fraccion",
+            "nombre":"fraction",
             "valor":"0",
             "id":12,
             "opcion":8
@@ -467,6 +491,41 @@
             "id":19
           }
         ]
+      },
+      {
+        "tipoOpcion":"truefalse",
+        "id":12,
+        "pregunta":1354744,
+        "subopciones":[
+          {
+            "nombre":"fraction",
+            "valor":"100",
+            "id":20
+          },
+          {
+            "nombre":"text",
+            "valor":"true",
+            "id":21,
+            "opcion":12
+          }
+        ]
+      },
+      {
+        "tipoOpcion":"truefalse",
+        "id":13,
+        "pregunta":1354744,
+        "subopciones":[
+          {
+            "nombre":"fraction",
+            "valor":"0",
+            "id":22
+          },
+          {
+            "nombre":"text",
+            "valor":"false",
+            "id":23
+          }
+        ]
       }
     ]
   },
@@ -528,7 +587,7 @@
         "opcion":6
       },
       {
-        "nombre":"fraccion",
+        "nombre":"fraction",
         "valor":"100",
         "id":10,
         "opcion":7
@@ -540,7 +599,7 @@
         "opcion":7
       },
       {
-        "nombre":"fraccion",
+        "nombre":"fraction",
         "valor":"0",
         "id":12,
         "opcion":8
@@ -586,6 +645,30 @@
         "valor":"8",
         "id":19,
         "opcion":11
+      },
+      {
+        "nombre":"fraction",
+        "valor":"100",
+        "id":20,
+        "opcion":12
+      },
+      {
+        "nombre":"text",
+        "valor":"true",
+        "id":21,
+        "opcion":12
+      },
+      {
+        "nombre":"fraction",
+        "valor":"0",
+        "id":22,
+        "opcion":13
+      },
+      {
+        "nombre":"text",
+        "valor":"false",
+        "id":23,
+        "opcion":13
       }
     ]
   }

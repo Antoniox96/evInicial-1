@@ -107,29 +107,55 @@ module.exports = {
 		},
 
 		corregirNumerical: function(respuestaCompleta, cb) { 
-	 		Answered = respuestaCompleta.answered;
-	            
-	        Opcion.findOne({
-	            where: { id: Number(Answered) }
-	        }).populate('subopciones').then(function(opcion){
-	            opcion.subopciones.forEach(function(subopcion){
-	                if(subopcion.nombre == 'fraction'){
-                		var Puntos = subopcion.valor;
-	                }
-	                if(subopcion.nombre == 'text'){
-	                    respuestaCompleta.answered = subopcion.valor;
-	                }
-	            });
+			Answered = respuestaCompleta.answered;
+            Puntos = 0;
+
+            Opcion.findOne({
+                where: { pregunta: this.id, id: Number(Answered)}
+                }).populate('subopciones').then(function(misOpciones){
+
+                misOpciones.subopciones.forEach(function(subopcion){
+                    
+                    if(subopcion.nombre === 'fraction'){
+                        Puntos = subopcion.valor;
+                    }
+
+                    if(subopcion.nombre === 'text'){
+                        texto = subopcion.valor;
+                    }
+                
+                });
+
 				cb(respuestaCompleta, Puntos);
-	        })
+            });
 		},
 
 		corregirTruefalse: function(respuestaCompleta, cb) { 
+            Answered = respuestaCompleta.answered;
+            Puntos = 0;
 
+            Opcion.findOne({
+                where: { pregunta: this.id, id: Number(Answered)}
+                }).populate('subopciones').then(function(misOpciones){
+
+                misOpciones.subopciones.forEach(function(subopcion){
+                    
+                    if(subopcion.nombre === 'fraction'){
+                        Puntos = subopcion.valor;
+                    }
+
+                    if(subopcion.nombre === 'text'){
+                        texto = subopcion.valor;
+                    }
+                
+                });
+
+				cb(respuestaCompleta, Puntos);
+            });
 		},		
 
 		aJSON: function() {
-				return Opcion.find().where({ pregunta: this.id }).populate('subopciones');
+			return Opcion.find().where({ pregunta: this.id }).populate('subopciones');
 		},
 
 		guardarRespuesta: function(respuestaCompleta, Puntos, cb) {
