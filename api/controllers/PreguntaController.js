@@ -29,6 +29,12 @@ module.exports = {
 		req.pregunta.corregir(respuestaCompleta, function(preguntaCorregida) {
 				res.json(preguntaCorregida);
 			});
+	},
+
+	siguiente: function(req, res, next) {
+		Pregunta.findOne({ where: { id : { '>': Number(req.pregunta.id) } } }).then(function(allPreguntas){
+ 			res.json(allPreguntas);
+ 		});
 	}
 
 };

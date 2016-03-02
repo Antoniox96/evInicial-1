@@ -71,6 +71,8 @@ module.exports.policies = {
   PreguntaController: {
     'load' : ['sessionAuth', 'isAlumno'],
     
-    'corregir' : ['sessionAuth', 'isAlumno']
+    'corregir' : ['sessionAuth', 'isAlumno'],
+
+    'siguiente' : ['sessionAuth', 'isAlumno']
   },
 };

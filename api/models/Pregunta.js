@@ -86,24 +86,27 @@ module.exports = {
 						
 				})
 				.catch(function(error){
-						console.log(error);
+					cb("Ha ocurrido un error.");
 				});
 		},
 
 		corregirMultichoice: function(respuestaCompleta, cb) {
 			Answered = respuestaCompleta.answered;
+            Puntos = 0;
 
-			Subopcion.findOne({
-                where: {opcion: Number(Answered), nombre: "fraccion"}
-            }).then(function(subopcion){
-                var Puntos = subopcion.valor;
-                Subopcion.findOne({
-                    where: {opcion: Number(Answered), nombre: "text"}
-                }).then(function(subopcion){
-                    respuestaCompleta.answered = subopcion.valor;
-					cb(respuestaCompleta, Puntos);
-                })  
-            })
+			Subopcion.findOne({ where: {opcion: Number(Answered), nombre: "fraccion"} })
+				.then(function(subopcion){
+	                Puntos = subopcion.valor;
+	                Subopcion.findOne({
+	                    where: {opcion: Number(Answered), nombre: "text"}
+	                }).then(function(subopcion){
+	                    respuestaCompleta.answered = subopcion.valor;
+						cb(respuestaCompleta, Puntos);
+	                })  
+	            })
+	            .catch(function(error) {
+					cb(error);
+	            })
 		},
 
 		corregirNumerical: function(respuestaCompleta, cb) { 
@@ -127,7 +130,10 @@ module.exports = {
                 });
 
 				cb(respuestaCompleta, Puntos);
-            });
+            })
+            .catch(function(error) {
+				cb("Ha ocurrido un error.");
+            })
 		},
 
 		corregirTruefalse: function(respuestaCompleta, cb) { 
@@ -151,7 +157,10 @@ module.exports = {
                 });
 
 				cb(respuestaCompleta, Puntos);
-            });
+            })
+            .catch(function(error) {
+				cb("Ha ocurrido un error.");
+            })
 		},		
 
 		aJSON: function() {
@@ -171,10 +180,9 @@ module.exports = {
 
 				})
 				.catch(function(error){
-						console.log(error);
+					cb("Ha ocurrido un error.");
 				});
 		}
-
 
 	},
 

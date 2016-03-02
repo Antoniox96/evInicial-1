@@ -7,7 +7,7 @@
 
         ],
         "alumnos":[
-
+          
         ],
         "respuestas":[
 
@@ -84,7 +84,7 @@
       },
       {
         "cuestionarios":[
-
+        
         ],
         "grupo":{
           "anyo":"2015/16",
@@ -130,7 +130,11 @@
       },
       {
         "cuestionarios":[
-
+          {
+          "observaciones":"Evaluación Inicial",
+          "fechaFin":"2016-02-21T00:00:00.000Z",
+          "id":1
+          }
         ],
         "grupo":{
           "anyo":"2015/16",
